@@ -1,0 +1,464 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>HTTP协议 | TM博客</title><meta name="author" content="TMsix"><meta name="copyright" content="TMsix"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="五层模型 应用层 为应用软件提供了很多服务，构建于协议之上   传输层 数据传输都是在这层定义的，数据过大，分包分片。   网络层 为数据在节点之间传输创建逻辑链路   数据链路层 通讯实体间建立数据链路连接   物理层  三次握手（连接）​	问：如何保证数据可靠到达 ​	问：为什么是 3 次握手，而不是 2 次或者 4 次 ​		2次：如果两次，客户端可能收到的消息丢失，客户端会认为建立连接失败">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP协议">
+<meta property="og:url" content="http://example.com/2023/03/21/note/HTTP%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="TM博客">
+<meta property="og:description" content="五层模型 应用层 为应用软件提供了很多服务，构建于协议之上   传输层 数据传输都是在这层定义的，数据过大，分包分片。   网络层 为数据在节点之间传输创建逻辑链路   数据链路层 通讯实体间建立数据链路连接   物理层  三次握手（连接）​	问：如何保证数据可靠到达 ​	问：为什么是 3 次握手，而不是 2 次或者 4 次 ​		2次：如果两次，客户端可能收到的消息丢失，客户端会认为建立连接失败">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ts1.cn.mm.bing.net/th/id/R-C.c2b8c0eb6e745db55b8170bd750ceed4?rik=6HVBYvwUSk%2bbjw&riu=http%3a%2f%2fimages.jackailiu.com%2fimg%2f201907%2f0x0%2f156448768892282.jpg&ehk=xvkhOe81VqDYpjWaZxGNQqqcVJdIpN8z%2fR9OicRXrUM%3d&risl=&pid=ImgRaw&r=0">
+<meta property="article:published_time" content="2023-03-21T09:07:21.000Z">
+<meta property="article:modified_time" content="2023-05-11T08:06:10.081Z">
+<meta property="article:author" content="TMsix">
+<meta property="article:tag" content="博客,TM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ts1.cn.mm.bing.net/th/id/R-C.c2b8c0eb6e745db55b8170bd750ceed4?rik=6HVBYvwUSk%2bbjw&riu=http%3a%2f%2fimages.jackailiu.com%2fimg%2f201907%2f0x0%2f156448768892282.jpg&ehk=xvkhOe81VqDYpjWaZxGNQqqcVJdIpN8z%2fR9OicRXrUM%3d&risl=&pid=ImgRaw&r=0"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2023/03/21/note/HTTP%E5%8D%8F%E8%AE%AE/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"bottom-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'HTTP协议',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-05-11 16:06:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar_003.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://img9.vilipix.com/picture/pages/regular/2021/04/14/15/30/39760220_p0_master1200.jpg?x-oss-process=image/resize,m_fill,w_1000')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">TM博客</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 時間軸</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">HTTP协议</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-21T09:07:21.000Z" title="发表于 2023-03-21 17:07:21">2023-03-21</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-05-11T08:06:10.081Z" title="更新于 2023-05-11 16:06:10">2023-05-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="HTTP协议"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="五层模型"><a href="#五层模型" class="headerlink" title="五层模型"></a>五层模型</h1><ol>
+<li>应用层<ol>
+<li>为应用软件提供了很多服务，构建于协议之上</li>
+</ol>
+</li>
+<li>传输层<ol>
+<li>数据传输都是在这层定义的，数据过大，分包分片。</li>
+</ol>
+</li>
+<li>网络层<ol>
+<li>为数据在节点之间传输创建逻辑链路</li>
+</ol>
+</li>
+<li>数据链路层<ol>
+<li>通讯实体间建立数据链路连接</li>
+</ol>
+</li>
+<li>物理层</li>
+</ol>
+<h1 id="三次握手（连接）"><a href="#三次握手（连接）" class="headerlink" title="三次握手（连接）"></a>三次握手（连接）</h1><p>​	问：<strong>如何保证数据可靠到达</strong></p>
+<p>​	问：<strong>为什么是 3 次握手，而不是 2 次或者 4 次</strong></p>
+<p>​		2次：如果两次，客户端可能收到的消息丢失，客户端会认为建立连接失败，在此建立新的；连接，浪费服务端资源</p>
+<p>​		4次：如果四次，就是说服务端再发送简历成功的报文，这样客户端有可能会出现建立两次的场景错误，丢失数据，认为没有建立成功，再次请求建立</p>
+<p> 问：<strong>为什么要有</strong></p>
+<ul>
+<li>可能有网络延迟，客户端发送请求到服务器要求建立连接，如果服务器返回出现丢包，客户端接收不到数据超时关闭连接，可能会重新发送新的连接，服务端并不知道客户端情况，服务端口一直开着，造成额外开销。</li>
+</ul>
+<p>过程</p>
+<ul>
+<li>客户端发送报文请求连接</li>
+<li>服务端<strong>回传</strong>报文，表示可以连接，客户端接收</li>
+<li>客户端<strong>回传</strong>报文，表示收到可以连接，然后建立连接</li>
+</ul>
+<h1 id="四次挥手（关闭）"><a href="#四次挥手（关闭）" class="headerlink" title="四次挥手（关闭）"></a>四次挥手（关闭）</h1><p>1.过程</p>
+<ul>
+<li><p>客户端 向 服务端 发送消息释放连接</p>
+</li>
+<li><p>服务端 收到 客户端 消息，返回同意断开请求，但还没有确认关闭</p>
+</li>
+<li><p>服务端 对 客户端 发送遗留数据完成后，在此发送消息，表示准备好释放连接 </p>
+</li>
+<li><p>客户端 收到 服务端 消息结果，发送收到释放连接指令 并 关闭通讯</p>
+</li>
+</ul>
+<p>​	问：<strong>为什么是4次而不是3次？</strong></p>
+<p>​		-	因为数据可能未发送完，所以要等待客户端处理完并发送消息</p>
+<h1 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h1><p>​	强缓存，指的是 <strong>让浏览器强制缓存服务端提供的资源</strong>。</p>
+<ul>
+<li><p>响应头字段 Cache-Control，通过设置 <code>max-age=&lt;seconds&gt;</code>，可以规定资源的缓存有效时间长度，单位为秒。</p>
+<ul>
+<li><pre><code>在浏览器 devtool 的 network 面板，我们看到 from disk cache 的字样，代表这个资源并没有去发送请求，而是使用了来自硬盘的缓存。
+</code></pre>
+</li>
+</ul>
+</li>
+<li><p>当你<strong>强制刷新</strong>时，浏览器会在请求头中加上 <code>Cache-Control: no-cache</code> 或是 <code>Cache-Control: max-age=0</code>，要求服务端返回最新资源。</p>
+</li>
+<li><p><strong>Expires</strong>：过期时间（单位 秒&#x2F;s）</p>
+</li>
+</ul>
+<h1 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h1><p>​	协商缓存，是<strong>在缓存过期的情况下，客户端和服务端协商，确认客户端缓存是否需要更新</strong>。</p>
+<ul>
+<li><strong>Last-Modified 和 If-Modified-Since</strong><ul>
+<li>响应头字段 Last-Modified 表示提供的资源最后被修改的时间</li>
+<li>当浏览器的缓存失效后，会再次请求服务端，并带上 If-Modified-Since 请求头字段，它的值就是之前 Last-Modified 带过来的值。</li>
+<li>服务端判断</li>
+<li>未改变：304</li>
+<li>改变发送最新数据：200</li>
+</ul>
+</li>
+<li><strong>ETag</strong><ul>
+<li>还可以使用 ETag 响应头，ETag 的值没有规定，你可以是 时间戳 的 哈希值，也可以是版本号</li>
+<li>客户端会在请求头带上 If-None-Match 去请求资源</li>
+<li>服务端判断</li>
+<li>未改变：304</li>
+<li>改变发送最新数据：200</li>
+</ul>
+</li>
+</ul>
+<h1 id="浏览器地址到页面展示"><a href="#浏览器地址到页面展示" class="headerlink" title="浏览器地址到页面展示"></a>浏览器地址到页面展示</h1><ol>
+<li><p>域名解析</p>
+</li>
+<li><p>发起 TCP 的 3 次握手</p>
+</li>
+<li><p>建立 TCP 连接后发起 HTTP 请求</p>
+</li>
+<li><p>服务器响应 HTTP 请求，浏览器得到 html 代码 </p>
+</li>
+<li><p>浏览器解析 html 代码，并请求 html 代码中的资源（如 js、css、图片等）</p>
+</li>
+<li><p>浏览器对页面进行渲染呈现给用户</p>
+</li>
+</ol>
+<h1 id="常用的HTTP方法"><a href="#常用的HTTP方法" class="headerlink" title="常用的HTTP方法"></a>常用的HTTP方法</h1><ol>
+<li>GET    从服务端获取指定信息                                                   </li>
+<li>POST    向服务端发送待处理的数据   </li>
+<li>HEAD    从服务端获取指定信息的头部      </li>
+<li>PUT    向服务端发送数据并替换服务端上指定的数据</li>
+<li>OPTIONS    查询针对请求URL指定的资源支持</li>
+<li>DELETE    从服务端删除指定数据</li>
+<li>TRACE    沿着目标资源的路径执行消息环回测试</li>
+</ol>
+<h1 id="HTTP跨域请求时为何发送options请求"><a href="#HTTP跨域请求时为何发送options请求" class="headerlink" title="HTTP跨域请求时为何发送options请求"></a><strong>HTTP跨域请求时为何发送options请求</strong></h1><ul>
+<li>options请求，是跨域请求之前的预检查</li>
+<li>浏览器自行发起的，无需我们干预</li>
+<li>不会影响实际的功能</li>
+</ul>
+<h1 id="HTTP如何持久化连接"><a href="#HTTP如何持久化连接" class="headerlink" title="HTTP如何持久化连接"></a>HTTP如何持久化连接</h1><ul>
+<li>使用keep-alive</li>
+<li>只要一端没有提出断开连接就会一直保持TCP连接的状态</li>
+<li>客户端可以同时并发多个请求，不用一个一个等待响应</li>
+</ul>
+<h1 id="WebSocket-和HTTP区别"><a href="#WebSocket-和HTTP区别" class="headerlink" title="WebSocket 和HTTP区别"></a><strong>WebSocket 和HTTP区别</strong></h1><ul>
+<li>WebSocket协议名是ws:&#x2F;&#x2F; ，可双端发起请求</li>
+<li><strong>WebSocket没有跨域限制</strong></li>
+<li>通过send和onmessage通讯（HTTP通过req和res )</li>
+</ul>
+<h3 id="说说网络分层里七层模型是哪七层"><a href="#说说网络分层里七层模型是哪七层" class="headerlink" title="说说网络分层里七层模型是哪七层"></a>说说网络分层里七层模型是哪七层</h3><p>​	<strong>物理层</strong>：通过媒介传输比特，确定机械及电气规范 </p>
+<p>​	<strong>数据链路层</strong>：将比特组装成帧和点到点的传递 </p>
+<p>​	<strong>网络层</strong>：负责数据包从源到宿的传递和网际互连 </p>
+<p>​	<strong>传输层</strong>：提供端到端的可靠报文传递和错误恢复 </p>
+<p>​	<strong>会话层</strong>：建立、管理和终止会话</p>
+<p>​	<strong>表示层</strong>：对数据进行翻译、加密和压缩</p>
+<p>​	<strong>应用层</strong>：允许访问OSI环境的手段</p>
+<h1 id="问：？？？？"><a href="#问：？？？？" class="headerlink" title="问：？？？？"></a>问：？？？？</h1><h2 id="为什么收获HTTP是无状态协议？如何解决"><a href="#为什么收获HTTP是无状态协议？如何解决" class="headerlink" title="为什么收获HTTP是无状态协议？如何解决"></a>为什么收获HTTP是无状态协议？如何解决</h2><ul>
+<li>http本身不保存状态，不对请求和响应的通信状态保存</li>
+<li>引入cookie管理《保存用户登录信息》</li>
+<li>由服务端生成，添加到响应头，以后客户端每次请求都对自动带上cookie信息</li>
+</ul>
+<h2 id="cookie和session区别"><a href="#cookie和session区别" class="headerlink" title="cookie和session区别"></a>cookie和session区别</h2><ul>
+<li><p>session服务端生成并保存于服务端</p>
+</li>
+<li><p>cookie数据载体，服务端生成，把session放入cookie中发送到客户端中，客户端http发送cookie出去</p>
+</li>
+<li><p>token服务端生成，保存于客户端</p>
+</li>
+<li><p>服务端渲染推荐 session</p>
+</li>
+<li><p>前后端分离推荐 jwt</p>
+<ol>
+<li><pre><code>储存位置不同
+</code></pre>
+<ol>
+<li><pre><code>cookie本地
+</code></pre>
+<ol start="2">
+<li><pre><code>session服务器生成存储
+</code></pre>
+<ol start="2">
+<li><pre><code>容量大小
+</code></pre>
+<ol>
+<li><pre><code>cookie &lt;= 4 KB
+</code></pre>
+<ol start="2">
+<li><pre><code>session 没有限制
+</code></pre>
+<ol start="3">
+<li><pre><code>有效期
+</code></pre>
+<ol>
+<li><pre><code>cookie 长期
+</code></pre>
+<ol start="2">
+<li><pre><code>关闭浏览器自动清除
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ul>
+<h1 id="JWT-认证"><a href="#JWT-认证" class="headerlink" title="JWT 认证"></a>JWT 认证</h1><p>​	</p>
+<p>优点：</p>
+<pre><code>1.	服务器不用缓存用户数据
+1.	可以跨域
+1.	有签名验证
+1.	自带有效时间信息
+</code></pre>
+<p>缺点：</p>
+<ol>
+<li>不能储存敏感信息</li>
+<li>不宜储存大量数据信息</li>
+<li>有一定安全性，但不如session</li>
+</ol>
+<p>​		</p>
+<ul>
+<li>服务端生成 <strong>JWT</strong></li>
+<li>保存浏览器本地 token</li>
+<li>请求时携带 token</li>
+<li>服务器拦截解析验证</li>
+</ul>
+<h1 id="http报文组成"><a href="#http报文组成" class="headerlink" title="http报文组成"></a>http报文组成</h1><ul>
+<li>请求报文包含三部分：</li>
+</ul>
+<ol>
+<li>请求行：包含请求方法、URI、HTTP版本信息</li>
+<li>请求首部字段</li>
+<li>请求内容实体</li>
+</ol>
+<ul>
+<li>响应报文包含三部分：</li>
+</ul>
+<ol>
+<li>状态行：包含HTTP版本、状态码、状态码的原因短语</li>
+<li>响应首部字段</li>
+<li>响应内容实体</li>
+</ol>
+<h1 id="HTTP和HTTPS"><a href="#HTTP和HTTPS" class="headerlink" title="HTTP和HTTPS"></a>HTTP和HTTPS</h1><p>http：</p>
+<ul>
+<li>通信使用明文不加密，内容可能被窃听</li>
+<li>不验证通信方身份，可能遭到伪装</li>
+<li>无法验证报文完整性，可能被篡改 HTTPS就是HTTP加上SSL加密处理（一般是SSL安全通信线路）+认证+完整性保护</li>
+</ul>
+<h1 id="对于Web项目进行体积、性能、构建速度、安全性方面的优化，可以采取以下一些措施："><a href="#对于Web项目进行体积、性能、构建速度、安全性方面的优化，可以采取以下一些措施：" class="headerlink" title="对于Web项目进行体积、性能、构建速度、安全性方面的优化，可以采取以下一些措施："></a>对于Web项目进行体积、性能、构建速度、安全性方面的优化，可以采取以下一些措施：</h1><ol>
+<li>体积优化：通过延迟加载、代码分割、图片压缩、字体优化、CDN加速、Tree-shaking等方式来减小Web应用程序体积。</li>
+<li>性能优化：通过前端性能指标分析工具检测性能问题，采用路由懒加载、组件懒加载、缓存常用请求、请求压缩、减小DOM节点数量、减少HTTP请求等方式来提升Web应用性能。</li>
+<li>构建速度优化：采用代码分割、按需加载、CDN加速等方式来减少文件大小；采用Webpack、Gulp等自动化构建工具，对代码做压缩混淆、打包优化、缓存等处理，减少构建时间。</li>
+<li>安全性优化：采用HTTPS来保证数据传输的安全，采用密钥加密方式进行身份认证，采用防御策略来防范攻击，将关键信息进行加密存储，保证数据的安全。</li>
+</ol>
+<p>需要注意的是，上述措施不是孤立存在的，它们之间是互相依存的，需要综合考虑，采取适合自己项目的综合优化方案。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://example.com">TMsix</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2023/03/21/note/HTTP%E5%8D%8F%E8%AE%AE/">http://example.com/2023/03/21/note/HTTP%E5%8D%8F%E8%AE%AE/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">TM博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://ts1.cn.mm.bing.net/th/id/R-C.c2b8c0eb6e745db55b8170bd750ceed4?rik=6HVBYvwUSk%2bbjw&amp;riu=http%3a%2f%2fimages.jackailiu.com%2fimg%2f201907%2f0x0%2f156448768892282.jpg&amp;ehk=xvkhOe81VqDYpjWaZxGNQqqcVJdIpN8z%2fR9OicRXrUM%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/28/note/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://images.pexels.com/photos/1037992/pexels-photo-1037992.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=600" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">自定义指令</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/14/note/%E8%A7%86%E9%A2%91%E6%96%AD%E7%82%B9%E4%B8%8A%E4%BC%A0/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">视频断点上传</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/avatar_003.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">TMsix</div><div class="author-info__description">不学习就残废</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">29</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E5%B1%82%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">五层模型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%88%E8%BF%9E%E6%8E%A5%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">三次握手（连接）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%88%E5%85%B3%E9%97%AD%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">四次挥手（关闭）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%BA%E7%BC%93%E5%AD%98"><span class="toc-number">4.</span> <span class="toc-text">强缓存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%8F%E5%95%86%E7%BC%93%E5%AD%98"><span class="toc-number">5.</span> <span class="toc-text">协商缓存</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E5%9C%B0%E5%9D%80%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="toc-number">6.</span> <span class="toc-text">浏览器地址到页面展示</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E7%9A%84HTTP%E6%96%B9%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">常用的HTTP方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E6%97%B6%E4%B8%BA%E4%BD%95%E5%8F%91%E9%80%81options%E8%AF%B7%E6%B1%82"><span class="toc-number">8.</span> <span class="toc-text">HTTP跨域请求时为何发送options请求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E5%A6%82%E4%BD%95%E6%8C%81%E4%B9%85%E5%8C%96%E8%BF%9E%E6%8E%A5"><span class="toc-number">9.</span> <span class="toc-text">HTTP如何持久化连接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WebSocket-%E5%92%8CHTTP%E5%8C%BA%E5%88%AB"><span class="toc-number">10.</span> <span class="toc-text">WebSocket 和HTTP区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B4%E8%AF%B4%E7%BD%91%E7%BB%9C%E5%88%86%E5%B1%82%E9%87%8C%E4%B8%83%E5%B1%82%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%93%AA%E4%B8%83%E5%B1%82"><span class="toc-number">10.0.1.</span> <span class="toc-text">说说网络分层里七层模型是哪七层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%EF%BC%9A%EF%BC%9F%EF%BC%9F%EF%BC%9F%EF%BC%9F"><span class="toc-number">11.</span> <span class="toc-text">问：？？？？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E6%94%B6%E8%8E%B7HTTP%E6%98%AF%E6%97%A0%E7%8A%B6%E6%80%81%E5%8D%8F%E8%AE%AE%EF%BC%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3"><span class="toc-number">11.1.</span> <span class="toc-text">为什么收获HTTP是无状态协议？如何解决</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cookie%E5%92%8Csession%E5%8C%BA%E5%88%AB"><span class="toc-number">11.2.</span> <span class="toc-text">cookie和session区别</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#JWT-%E8%AE%A4%E8%AF%81"><span class="toc-number">12.</span> <span class="toc-text">JWT 认证</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#http%E6%8A%A5%E6%96%87%E7%BB%84%E6%88%90"><span class="toc-number">13.</span> <span class="toc-text">http报文组成</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HTTP%E5%92%8CHTTPS"><span class="toc-number">14.</span> <span class="toc-text">HTTP和HTTPS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8EWeb%E9%A1%B9%E7%9B%AE%E8%BF%9B%E8%A1%8C%E4%BD%93%E7%A7%AF%E3%80%81%E6%80%A7%E8%83%BD%E3%80%81%E6%9E%84%E5%BB%BA%E9%80%9F%E5%BA%A6%E3%80%81%E5%AE%89%E5%85%A8%E6%80%A7%E6%96%B9%E9%9D%A2%E7%9A%84%E4%BC%98%E5%8C%96%EF%BC%8C%E5%8F%AF%E4%BB%A5%E9%87%87%E5%8F%96%E4%BB%A5%E4%B8%8B%E4%B8%80%E4%BA%9B%E6%8E%AA%E6%96%BD%EF%BC%9A"><span class="toc-number">15.</span> <span class="toc-text">对于Web项目进行体积、性能、构建速度、安全性方面的优化，可以采取以下一些措施：</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/05/01/note/koa2%E4%BD%BF%E7%94%A8/" title="koa2使用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img9.vilipix.com/picture/pages/regular/2023/04/06/14/107603372_p0_master1200.jpg?x-oss-process=image/resize,m_fill,w_1000" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="koa2使用"/></a><div class="content"><a class="title" href="/2023/05/01/note/koa2%E4%BD%BF%E7%94%A8/" title="koa2使用">koa2使用</a><time datetime="2023-05-01T00:53:43.000Z" title="发表于 2023-05-01 08:53:43">2023-05-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/17/HTML/Canvas%E5%B0%8F%E7%90%83%E6%A1%88%E4%BE%8B/" title="canvas小球碰撞"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://ts1.cn.mm.bing.net/th/id/R-C.78993c9185acf6081cd158a731cf3bf2?rik=tlKlviJAyu%2bfiw&amp;riu=http%3a%2f%2fi3.shouyou.itc.cn%2fv3%2fnews%2f2015%2f09%2f14%2f0914144316156230260.jpg&amp;ehk=PJu7l9A5SthDAaa%2bUjap%2bF9mP1ZaAfXymhUfgQfkMi8%3d&amp;risl=&amp;pid=ImgRaw&amp;r=0" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="canvas小球碰撞"/></a><div class="content"><a class="title" href="/2023/04/17/HTML/Canvas%E5%B0%8F%E7%90%83%E6%A1%88%E4%BE%8B/" title="canvas小球碰撞">canvas小球碰撞</a><time datetime="2023-04-17T09:24:58.000Z" title="发表于 2023-04-17 17:24:58">2023-04-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/16/%E5%8E%9F%E7%90%86/vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/" title="vue双向绑定原理"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img9.vilipix.com/picture/pages/regular/2023/04/06/15/107149204_p0_master1200.jpg?x-oss-process=image/resize,m_fill,w_1000" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vue双向绑定原理"/></a><div class="content"><a class="title" href="/2023/04/16/%E5%8E%9F%E7%90%86/vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/" title="vue双向绑定原理">vue双向绑定原理</a><time datetime="2023-04-16T09:24:58.000Z" title="发表于 2023-04-16 17:24:58">2023-04-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/16/%E5%B0%8F%E5%8A%9F%E8%83%BD/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%AF%BC%E5%87%BA/" title="文件上传与导出"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img9.vilipix.com/picture/pages/regular/2021/06/24/10/45/73355141_p0_master1200.jpg?x-oss-process=image/resize,m_fill,w_1000" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件上传与导出"/></a><div class="content"><a class="title" href="/2023/04/16/%E5%B0%8F%E5%8A%9F%E8%83%BD/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%AF%BC%E5%87%BA/" title="文件上传与导出">文件上传与导出</a><time datetime="2023-04-16T08:55:52.000Z" title="发表于 2023-04-16 16:55:52">2023-04-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/04/16/note/%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/" title="设置代理"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="http://up.36992.com/pic/e6/c5/51/e6c551e768092c8655292d89a4034a74.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="设置代理"/></a><div class="content"><a class="title" href="/2023/04/16/note/%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/" title="设置代理">设置代理</a><time datetime="2023-04-16T01:53:43.000Z" title="发表于 2023-04-16 09:53:43">2023-04-16</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://img9.vilipix.com/picture/pages/regular/2021/04/14/15/30/39760220_p0_master1200.jpg?x-oss-process=image/resize,m_fill,w_1000')"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2023 By TMsix</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a target="_blank" rel="noopener" href="https://butterfly.js.org/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !true) {
+  if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function loadDisqus () {
+  var disqus_config = function () {
+    this.page.url = 'http://example.com/2023/03/21/note/HTTP%E5%8D%8F%E8%AE%AE/'
+    this.page.identifier = '/2023/03/21/note/HTTP%E5%8D%8F%E8%AE%AE/'
+    this.page.title = 'HTTP协议'
+  };
+
+  window.disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+
+  document.getElementById('darkmode').addEventListener('click', () => {
+    setTimeout(() => window.disqusReset(), 200)
+  })
+}
+
+if ('Valine' === 'Disqus' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
