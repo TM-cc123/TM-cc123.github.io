@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>高精度倒计时（秒杀功能）</title>
+      <link href="/2023/05/14/%E5%B0%8F%E5%8A%9F%E8%83%BD/%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%80%92%E8%AE%A1%E6%97%B6%EF%BC%88%E7%A7%92%E6%9D%80%E5%8A%9F%E8%83%BD%EF%BC%89/"/>
+      <url>/2023/05/14/%E5%B0%8F%E5%8A%9F%E8%83%BD/%E9%AB%98%E7%B2%BE%E5%BA%A6%E5%80%92%E8%AE%A1%E6%97%B6%EF%BC%88%E7%A7%92%E6%9D%80%E5%8A%9F%E8%83%BD%EF%BC%89/</url>
+      
+      
+      <categories>
+          
+          <category> 小功能实现笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>axios重复请求</title>
+      <link href="/2023/05/04/%E5%B0%81%E8%A3%85/axios%E9%98%B2%E6%AD%A2%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82/"/>
+      <url>/2023/05/04/%E5%B0%81%E8%A3%85/axios%E9%98%B2%E6%AD%A2%E9%87%8D%E5%A4%8D%E8%AF%B7%E6%B1%82/</url>
+      
+      
+      <categories>
+          
+          <category> 封装 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>koa2使用</title>
+      <link href="/2023/05/01/note/koa2%E4%BD%BF%E7%94%A8/"/>
+      <url>/2023/05/01/note/koa2%E4%BD%BF%E7%94%A8/</url>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>canvas小球碰撞</title>
+      <link href="/2023/04/17/HTML/Canvas%E5%B0%8F%E7%90%83%E6%A1%88%E4%BE%8B/"/>
+      <url>/2023/04/17/HTML/Canvas%E5%B0%8F%E7%90%83%E6%A1%88%E4%BE%8B/</url>
+      
+      
+      <categories>
+          
+          <category> canvas </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue双向绑定原理</title>
+      <link href="/2023/04/16/%E5%8E%9F%E7%90%86/vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/"/>
+      <url>/2023/04/16/%E5%8E%9F%E7%90%86/vue%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A%E5%8E%9F%E7%90%86/</url>
+      
+      
+      <categories>
+          
+          <category> 原理 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>文件上传与导出</title>
+      <link href="/2023/04/16/%E5%B0%8F%E5%8A%9F%E8%83%BD/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%AF%BC%E5%87%BA/"/>
+      <url>/2023/04/16/%E5%B0%8F%E5%8A%9F%E8%83%BD/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E4%B8%8E%E5%AF%BC%E5%87%BA/</url>
+      
+      
+      <categories>
+          
+          <category> 小功能实现笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>设置代理</title>
+      <link href="/2023/04/16/note/%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/"/>
+      <url>/2023/04/16/note/%E8%AE%BE%E7%BD%AE%E4%BB%A3%E7%90%86/</url>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>localStroge设置过期时间</title>
+      <link href="/2023/04/15/%E5%B0%81%E8%A3%85/localStroge%E8%AE%BE%E7%BD%AE%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4/"/>
+      <url>/2023/04/15/%E5%B0%81%E8%A3%85/localStroge%E8%AE%BE%E7%BD%AE%E8%BF%87%E6%9C%9F%E6%97%B6%E9%97%B4/</url>
+      
+      
+      <categories>
+          
+          <category> 封装 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>正则表达式</title>
+      <link href="/2023/04/14/note/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <url>/2023/04/14/note/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>uView请求二次封装</title>
+      <link href="/2023/04/11/%E5%B0%81%E8%A3%85/uView%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85/"/>
+      <url>/2023/04/11/%E5%B0%81%E8%A3%85/uView%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85/</url>
+      
+      
+      <categories>
+          
+          <category> 封装 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>插件封装</title>
+      <link href="/2023/04/04/%E5%B0%81%E8%A3%85/%E6%8F%92%E4%BB%B6%E5%B0%81%E8%A3%85/"/>
+      <url>/2023/04/04/%E5%B0%81%E8%A3%85/%E6%8F%92%E4%BB%B6%E5%B0%81%E8%A3%85/</url>
+      
+      
+      <categories>
+          
+          <category> 封装 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>组件封装</title>
+      <link href="/2023/04/03/%E5%B0%81%E8%A3%85/%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/"/>
+      <url>/2023/04/03/%E5%B0%81%E8%A3%85/%E7%BB%84%E4%BB%B6%E5%B0%81%E8%A3%85/</url>
+      
+      
+      <categories>
+          
+          <category> 封装 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>路由拆分配置</title>
+      <link href="/2023/04/01/note/router%E6%8B%86%E5%88%86/"/>
+      <url>/2023/04/01/note/router%E6%8B%86%E5%88%86/</url>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vue打包</title>
+      <link href="/2023/03/31/note/vue%E6%89%93%E5%8C%85/"/>
+      <url>/2023/03/31/note/vue%E6%89%93%E5%8C%85/</url>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hooks使用</title>
+      <link href="/2023/03/29/hooks/hooks%E6%A8%A1%E5%9D%97%E5%8C%96%E6%8A%BD%E7%A6%BB/"/>
+      <url>/2023/03/29/hooks/hooks%E6%A8%A1%E5%9D%97%E5%8C%96%E6%8A%BD%E7%A6%BB/</url>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>自定义指令</title>
+      <link href="/2023/03/28/note/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/"/>
+      <url>/2023/03/28/note/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8C%87%E4%BB%A4/</url>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>HTTP协议</title>
+      <link href="/2023/03/21/note/HTTP%E5%8D%8F%E8%AE%AE/"/>
+      <url>/2023/03/21/note/HTTP%E5%8D%8F%E8%AE%AE/</url>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>视频断点上传</title>
+      <link href="/2023/03/14/note/%E8%A7%86%E9%A2%91%E6%96%AD%E7%82%B9%E4%B8%8A%E4%BC%A0/"/>
+      <url>/2023/03/14/note/%E8%A7%86%E9%A2%91%E6%96%AD%E7%82%B9%E4%B8%8A%E4%BC%A0/</url>
+      
+      
+      <categories>
+          
+          <category> 优化 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hooks结构</title>
+      <link href="/2023/03/01/note/hooks%E7%BB%93%E6%9E%84/"/>
+      <url>/2023/03/01/note/hooks%E7%BB%93%E6%9E%84/</url>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>node创建</title>
+      <link href="/2023/03/01/note/node%E5%88%9B%E5%BB%BA/"/>
+      <url>/2023/03/01/note/node%E5%88%9B%E5%BB%BA/</url>
+      
+      
+      <categories>
+          
+          <category> 笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>深拷贝</title>
+      <link href="/2023/03/01/%E5%B0%81%E8%A3%85/%E6%B7%B1%E6%8B%B7%E8%B4%9D/"/>
+      <url>/2023/03/01/%E5%B0%81%E8%A3%85/%E6%B7%B1%E6%8B%B7%E8%B4%9D/</url>
+      
+      
+      <categories>
+          
+          <category> 封装 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>axios请求封装</title>
+      <link href="/2023/02/28/%E5%B0%81%E8%A3%85/axios%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85/"/>
+      <url>/2023/02/28/%E5%B0%81%E8%A3%85/axios%E8%AF%B7%E6%B1%82%E5%B0%81%E8%A3%85/</url>
+      
+      
+      <categories>
+          
+          <category> 封装 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>uniapp 实现微信菜单弹出功能</title>
+      <link href="/2022/12/15/%E5%B0%8F%E5%8A%9F%E8%83%BD/uni%E5%BE%AE%E4%BF%A1%E8%8F%9C%E5%8D%95%E5%BC%B9%E5%87%BA/"/>
+      <url>/2022/12/15/%E5%B0%8F%E5%8A%9F%E8%83%BD/uni%E5%BE%AE%E4%BF%A1%E8%8F%9C%E5%8D%95%E5%BC%B9%E5%87%BA/</url>
+      
+      
+      <categories>
+          
+          <category> 小功能实现笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>滚动歌词</title>
+      <link href="/2022/12/14/%E5%B0%8F%E5%8A%9F%E8%83%BD/%E6%BB%9A%E5%8A%A8%E6%AD%8C%E8%AF%8D/"/>
+      <url>/2022/12/14/%E5%B0%8F%E5%8A%9F%E8%83%BD/%E6%BB%9A%E5%8A%A8%E6%AD%8C%E8%AF%8D/</url>
+      
+      
+      <categories>
+          
+          <category> 小功能实现笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>vuex和组件重构</title>
+      <link href="/2022/06/30/Nuxt/vuex%E5%92%8C%E7%BB%84%E4%BB%B6%E9%87%8D%E6%9E%84/"/>
+      <url>/2022/06/30/Nuxt/vuex%E5%92%8C%E7%BB%84%E4%BB%B6%E9%87%8D%E6%9E%84/</url>
+      
+      
+      
+        <tags>
+            
+            <tag> Nuxt.js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>请求重构</title>
+      <link href="/2022/06/30/Nuxt/%E8%AF%B7%E6%B1%82%E9%87%8D%E6%9E%84/"/>
+      <url>/2022/06/30/Nuxt/%E8%AF%B7%E6%B1%82%E9%87%8D%E6%9E%84/</url>
+      
+      
+      
+        <tags>
+            
+            <tag> Nuxt.js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>登录重构</title>
+      <link href="/2022/06/29/Nuxt/%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB/"/>
+      <url>/2022/06/29/Nuxt/%E5%AF%BC%E8%88%AA%E5%AE%88%E5%8D%AB/</url>
+      
+      
+      
+        <tags>
+            
+            <tag> Nuxt.js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>登录重构</title>
+      <link href="/2022/06/29/Nuxt/%E7%99%BB%E5%BD%95%E9%87%8D%E6%9E%84/"/>
+      <url>/2022/06/29/Nuxt/%E7%99%BB%E5%BD%95%E9%87%8D%E6%9E%84/</url>
+      
+      
+      
+        <tags>
+            
+            <tag> Nuxt.js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Nuxt安装</title>
+      <link href="/2022/06/29/Nuxt/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"/>
+      <url>/2022/06/29/Nuxt/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</url>
+      
+      
+      
+        <tags>
+            
+            <tag> Nuxt.js </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>全局Loading封装</title>
+      <link href="/2022/06/28/%E5%B0%81%E8%A3%85/loading/"/>
+      <url>/2022/06/28/%E5%B0%81%E8%A3%85/loading/</url>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SEO搜索引擎优化</title>
+      <link href="/2022/02/21/SEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/SEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/"/>
+      <url>/2022/02/21/SEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/SEO%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E4%BC%98%E5%8C%96/</url>
+      
+      
+      <categories>
+          
+          <category> 优化 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
